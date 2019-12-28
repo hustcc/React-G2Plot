@@ -1,0 +1,84 @@
+{
+  "name": "react-g2plot",
+  "version": "0.1.0",
+  "description": "Unofficial react component wrapper for @antv/g2plot.",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "files": [
+    "lib",
+    "esm"
+  ],
+  "scripts": {
+    "lint-staged": "lint-staged",
+    "test": "jest",
+    "ci": "npm run build && npm run test",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "rimraf ./lib && tsc --module commonjs --outDir lib",
+    "build:esm": "rimraf ./esm && tsc --module ESNext --outDir esm",
+    "demo": "DEBUG_MODE=1 jest",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hustcc/react-g2plot.git"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "react-g2plot",
+    "react-timeago",
+    "timeago.js",
+    "timeago",
+    "react-component"
+  ],
+  "author": "hustcc (http://github.com/hustcc)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hustcc/react-g2plot/issues"
+  },
+  "homepage": "https://github.com/hustcc/react-g2plot",
+  "devDependencies": {
+    "@antv/g2plot": "0.11.17",
+    "@commitlint/cli": "^8.2.0",
+    "@types/jest": "^24.0.19",
+    "@types/react": "^16.9.9",
+    "@types/react-dom": "^16.9.3",
+    "cross-env": "^5.1.3",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "jest-electron": "^0.1.7",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.18.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
+  },
+  "peerDependencies": {
+    "@antv/g2plot": "*",
+    "react": "^0.14.0 || ^15.0.0 || ^16.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "runner": "jest-electron/runner",
+    "testEnvironment": "jest-electron/environment",
+    "testRegex": "(/__tests__/.*(test|spec))\\.tsx?$",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/*"
+    ]
+  }
+}
