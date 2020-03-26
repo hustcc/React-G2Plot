@@ -30,7 +30,7 @@ export default class extends PureComponent<ReactG2PlotProps> {
   componentDidUpdate(prevProps) {
     const { Ctor, config } = prevProps;
 
-    if (size(get(this.props, ['confit', 'data'])) && JSON.stringify(this.props.config) !== JSON.stringify(config)) {
+    if (size(get(this.props, ['config', 'data'])) && JSON.stringify(this.props.config) !== JSON.stringify(config)) {
       // 只有有数据的时候才去渲染
       // 构造函数变化，则重新创建；或者 chart 不存在
       if (this.props.Ctor !== Ctor || !this.plot) {
