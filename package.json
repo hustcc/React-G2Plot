@@ -1,6 +1,6 @@
 {
   "name": "react-g2plot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Unofficial react component wrapper for @antv/g2plot.",
   "main": "lib/index.js",
   "module": "esm/index.js",
