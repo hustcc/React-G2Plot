@@ -27,7 +27,7 @@ jobs:
       - name: npm run build
         run: |
           npm run build
-      - name: gh-pahes
+      - name: gh-pages
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
