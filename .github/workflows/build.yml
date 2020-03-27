@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x,9.x,10.x,11.x,12.x]
+        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -24,3 +24,13 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: npm run build
+        run: |
+          npm run build
+      - name: gh-pahes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          directory: public
+          branch: gh-pages
+          force: true
