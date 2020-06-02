@@ -34,7 +34,11 @@ const config = {
   smooth: true,
 };
 
+function ref(plot) {
+  console.log('G2Plot instance Ref', plot);
+}
+
 ReactDOM.render(
-  <ReactG2Plot className="g2plot-for-react" Ctor={Line} config={config} />,
+  <ReactG2Plot className="g2plot-for-react" Ctor={Line} config={config} ref={ref} />,
   document.getElementById('root-container'),
 );
