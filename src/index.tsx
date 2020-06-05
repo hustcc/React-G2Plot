@@ -34,6 +34,7 @@ export default forwardRef((props: ReactG2PlotProps, ref: any) => {
   function newPlot() {
     if (plotRef.current) {
       plotRef.current.destroy();
+      plotRef.current = undefined;
     }
 
     plotRef.current = new Ctor($dom.current, config);
@@ -49,6 +50,7 @@ export default forwardRef((props: ReactG2PlotProps, ref: any) => {
     return () => {
       if (plotRef.current) {
         plotRef.current.destroy();
+        plotRef.current = undefined;
       }
     };
   }, [Ctor, config]);
