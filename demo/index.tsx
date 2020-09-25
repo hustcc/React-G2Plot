@@ -13,60 +13,49 @@ const Data = [
   { year: '1997', value: 7 },
   { year: '1998', value: 9 },
   { year: '1999', value: 13 },
+  { year: '2000', value: 4 },
+  { year: '2001', value: 7 },
+  { year: '2002', value: 2 },
+  { year: '2003', value: 20 },
 ];
-
-const LineConfig = {
-  title: {
-    visible: true,
-    text: '曲线折线图',
-  },
-  description: {
-    visible: true,
-    text: '用平滑的曲线代替折线。',
-  },
-  padding: 'auto',
-  forceFit: true,
-  data: Data,
-  xField: 'year',
-  yField: 'value',
-  smooth: true,
-};
-
-const ColumnConfig = {
-  title: {
-    visible: true,
-    text: '柱形图',
-  },
-  description: {
-    visible: true,
-    text: '使用柱形图展示每一年的对比情况。',
-  },
-  padding: 'auto',
-  forceFit: true,
-  data: Data,
-  xField: 'year',
-  yField: 'value',
-};
 
 function Entry() {
   const [isLine, setIsLine] = useState<boolean>(true);
+  const [data, setData] = useState<object[]>(Data);
 
   function ref(plot) {
-    console.log('G2Plot instance Ref', plot);
+    console.log('G2Plot instance Ref', plot.type);
   }
 
   function getCtor() {
     return isLine ? Line : Column;
   }
 
-  function getConfig() {
-    return isLine ? LineConfig : ColumnConfig;
+  function getOptions() {
+    return isLine
+      ? {
+          data,
+          xField: 'year',
+          yField: 'value',
+          smooth: true,
+          appendPadding: 12,
+        }
+      : {
+          data,
+          xField: 'year',
+          yField: 'value',
+          appendPadding: 12,
+        };
   }
 
   useEffect(() => {
     const id = setInterval(() => {
       // 切换
-      setIsLine(!isLine);
+      if (Math.random() > 0.5) {
+        setIsLine(!isLine);
+      } else {
+        setData(data.slice(0, 6 + Math.floor(Math.random() * 5)));
+      }
     }, 3000);
 
     return () => {
@@ -74,7 +63,7 @@ function Entry() {
     };
   }, [isLine]);
 
-  return <ReactG2Plot className="g2plot-for-react" Ctor={getCtor()} config={getConfig()} ref={ref} />;
+  return <ReactG2Plot Ctor={getCtor()} options={getOptions()} ref={ref} />;
 }
 
 ReactDOM.render(<Entry />, document.getElementById('root-container'));

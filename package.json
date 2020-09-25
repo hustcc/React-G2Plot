@@ -1,12 +1,14 @@
 {
   "name": "react-g2plot",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Unofficial react component wrapper for @antv/g2plot.",
   "main": "lib/index.js",
   "module": "esm/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib",
-    "esm"
+    "esm",
+    "src"
   ],
   "scripts": {
     "lint-staged": "lint-staged",
@@ -41,7 +43,7 @@
   },
   "homepage": "https://github.com/hustcc/react-g2plot",
   "devDependencies": {
-    "@antv/g2plot": "^1.0.0",
+    "@antv/g2plot": "^2.0.0-beta.6",
     "@commitlint/cli": "^8.2.0",
     "@types/jest": "^24.0.19",
     "@types/react": "^16.9.9",
@@ -64,7 +66,7 @@
     "webpack-cli": "^3.3.11"
   },
   "peerDependencies": {
-    "@antv/g2plot": "*",
+    "@antv/g2plot": "^2.0.0",
     "react": ">= 16.8.0"
   },
   "lint-staged": {

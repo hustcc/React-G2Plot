@@ -31,17 +31,7 @@ describe('ReactG2Plot', () => {
     ];
 
     // line chart config
-    const config = {
-      title: {
-        visible: true,
-        text: '曲线折线图',
-      },
-      description: {
-        visible: true,
-        text: '用平滑的曲线代替折线。',
-      },
-      padding: 'auto',
-      forceFit: true,
+    const options = {
       data,
       xField: 'year',
       yField: 'value',
@@ -49,7 +39,7 @@ describe('ReactG2Plot', () => {
     };
 
     // render g2plot react component
-    ReactDOM.render(<ReactG2Plot className="g2plot-for-react" Ctor={Line} config={config} />, createDiv());
+    ReactDOM.render(<ReactG2Plot Ctor={Line} options={options} />, createDiv());
 
     expect(document.querySelector('.g2plot-for-react')).not.toBeNull();
   });

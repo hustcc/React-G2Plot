@@ -26,14 +26,14 @@ $ npm install react-g2plot
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import { Line } from '@antv/g2plot'
-import ReactG2Plot from 'react-g2plot';
+import { Line } from '@antv/g2plot';      // import plot from G2Plot
+import ReactG2Plot from 'react-g2plot';   // import React wrapper
 
 ReactDOM.render(
   <ReactG2Plot
     className="your-classname"
     Ctor={Line}
-    config={config}
+    options={options}
   />,
   mountNode,
 );
@@ -42,7 +42,7 @@ ReactDOM.render(
 
 ## Documents
 
-All documents about `plot` and `config` are [here](https://g2plot.antv.vision/).
+All documents about `plot` and `options` are [here](https://g2plot.antv.vision/).
 
 
 
@@ -62,5 +62,3 @@ $ npm run demo
 ## LICENSE
 
 MIT@[hustcc](https://github.com/hustcc).
-
-

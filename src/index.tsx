@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, forwardRef } from 'react';
 
-export type ReactG2PlotProps = {
+export type ReactG2PlotProps<O> = {
   readonly className?: string;
   readonly Ctor: any;
-  readonly config: object;
+  readonly options: O;
 };
 
 /**
- * 一个基本可用的 G2Plot React 组件
+ * 一个业务可用的 G2Plot React 组件
  */
-export default forwardRef((props: ReactG2PlotProps, ref: any) => {
-  const { className, Ctor, config } = props;
+export default forwardRef(function<O = any>(props: ReactG2PlotProps<O>, ref: any) {
+  const { className, Ctor, options } = props;
 
   const $dom = useRef(undefined);
   const plotRef = useRef(undefined);
@@ -29,31 +29,39 @@ export default forwardRef((props: ReactG2PlotProps, ref: any) => {
   }
 
   /**
-   * 创建
+   * 如果存在则更新，否则就创建
    */
-  function newPlot() {
+  function renderPlot() {
+    if (plotRef.current) {
+      // update
+      plotRef.current.update(options);
+    } else {
+      // new
+      plotRef.current = new Ctor($dom.current, options);
+      plotRef.current.render();
+    }
+
+    syncRef(plotRef, ref);
+  }
+
+  /**
+   * 销毁
+   */
+  function destoryPlot() {
     if (plotRef.current) {
       plotRef.current.destroy();
       plotRef.current = undefined;
     }
-
-    plotRef.current = new Ctor($dom.current, config);
-
-    syncRef(plotRef, ref);
-
-    plotRef.current.render();
   }
 
   useEffect(() => {
-    newPlot();
+    renderPlot();
 
     return () => {
-      if (plotRef.current) {
-        plotRef.current.destroy();
-        plotRef.current = undefined;
-      }
+      destoryPlot();
     };
-  }, [Ctor, config]);
+  }, [options, Ctor]);
 
-  return <div className={className} ref={$dom} />;
+  // 默认添加 g2plot-for-react 的 class
+  return <div className={`g2plot-for-react ${className || ''}`} ref={$dom} />;
 });
